@@ -25,9 +25,12 @@ class Machine(object):
                 self.ssh = ConnectHandler(**machine)
                
         def logoff_ssh(self)
+                self.ssh.disconnect()
 
 
-test = Machine
+test = Machine(username='admin',password='a10',ipaddr='192.168.201.15',device='a10')
+
+test.ssh.send_command("show int brief");
                 
 
 
