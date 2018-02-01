@@ -12,7 +12,22 @@ class Machine(object):
                 self.username = kwargs['username']
                 self.password = kwargs['password']	
                 self.ipaddr = kwargs['ipaddr']
+                self.device_type=kwargs['device']
             #except:
             #    print("Argument Error , Please check error")
-        def to_ssh
+        def ssh(self)
+                machine = {
+                        'device-type':self.device_type,
+                        'username':self.username,
+                        'password':self.password,
+                        'ip':self.ipaddr
+                        }
+                self.ssh = ConnectHandler(**machine)
+               
+        def logoff_ssh(self)
+
+
+test = Machine
+                
+
 
