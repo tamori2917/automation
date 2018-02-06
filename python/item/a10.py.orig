@@ -10,8 +10,7 @@ class A10(Machine):
             super(A10,self).__init__(**kwargs)
             self.session = ''
             self.signature = ''	
-            self.url = 'https://' + kwargs['ipaddr']
-            #need to think how to reuse this header for other axapi request, maybe can use append?
+            self.url = 'https://' + kwargs['ipaddr'] 	
             self.header = {'Content-Type':'application/json'}
 
         def login(self):
@@ -41,10 +40,14 @@ class A10(Machine):
 	    	print("else")
 	    else
 	    	print("else2")
-#FOR TESTING CLASS!! please Comment before push
-#a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31')
-#a10.login()
-#print(a10.signature)
-#a10.get("class-list")
-#a10.classlist("classlist","get")
 
+a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31')
+a10.login()
+print(a10.signature)
+<<<<<<< HEAD
+helllo my name is khairul
+=======
+#a10.get("class-list")
+a10.classlist("classlist","get")
+
+>>>>>>> mori2
