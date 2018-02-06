@@ -28,3 +28,4 @@ class A10(Machine):
 
 a10 = A10(username='admin',password='a10',ipaddr='192.168.201.15')
 print(a10.signature)
+helllo my name is khairul
