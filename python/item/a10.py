@@ -27,5 +27,12 @@ class A10(Machine):
         def ssh(self,command):
 
 a10 = A10(username='admin',password='a10',ipaddr='192.168.201.15')
+<<<<<<< HEAD
 print(a10.signature)
 helllo my name is khairul
+print(a10.signature).my best
+this is the latest please try
+=======
+print(a10.signature).my best
+this is the latest please try
+>>>>>>> refs/remotes/origin/master
