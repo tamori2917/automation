@@ -21,6 +21,7 @@ class Machine(object):
                 self.ssh = ConnectHandler(**machine)
             #except:
             #    print("Argument Error , Please check error")
+<<<<<<< HEAD
                
         def logoff_ssh(self):
                 self.ssh.disconnect()
@@ -34,4 +35,7 @@ class Machine(object):
 #test.ssh.logoff_ssh()
 
 
+=======
+       # def to_ssh
+>>>>>>> add get in a10.py
 
