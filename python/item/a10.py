@@ -68,4 +68,3 @@ a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='
 a10.login()
 print(a10.signature)
 a10.classlist("class-list","post")
-
