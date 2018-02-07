@@ -6,8 +6,8 @@ import re
 linuxpc = {
         'device_type':'linux',
         'ip':'127.0.0.1',
-        'username':'khaianna',
-        'password':'kanna1231'
+        'username':'',
+        'password':''
 } 
 
 connect = ConnectHandler(**linuxpc)
