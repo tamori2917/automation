@@ -1,0 +1,7 @@
+#coding:utf-8
+import json
+
+f = open('class-list1.json', 'r')
+jsonData = json.load(f)
+#test = json.dumps(jsonData, sort_keys = True, indent = 0)
+print (jsonData)

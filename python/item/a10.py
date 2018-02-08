@@ -4,6 +4,13 @@ import json
 from machine import Machine
 
 api_url = '/axapi/v3/'
+null = 'null'
+
+f = open('class-list1.json', 'r')
+print (f)
+jsonData = json.load(f)
+jsonData = json.dumps(f)
+print (jsonData)
 
 class A10(Machine):
 	def __init__(self,*args,**kwargs):
@@ -12,9 +19,12 @@ class A10(Machine):
 		self.signature = ''	
 		self.url = 'https://' + kwargs['ipaddr'] 	
 		self.header = {'Content-Type':'application/json'}
-		#self.payload = "{\"class-list\":{\"ac-list\":[\"ac-key-string\":\"abc.com\",\"ac-match-type\":\"ends-with\"],\"name\":\"test555\",\"type\":\"ac\",\"uuid\":null}}"
-		self.payload = "{'class-list':{'ac-list':['ac-key-string':'abc.com','ac-match-type':'ends-with'],'name':'a','type':'ac','uuid':null}}"
-		self.classlist1 = 'a'
+		self.payload = "'{}'".format(jsonData)
+#		self.payload = f
+#		self.payload = '{"class-list":{"ac-list":[{"ac-key-string":".yammerusercontent.com","ac-match-type":"ends-with"}],"name":"test5","type":"ac","uuid":null}}'
+
+		print (self.payload)
+
 
 	def login(self):
 		header = self.header
@@ -32,39 +42,29 @@ class A10(Machine):
 		response = requests.get( self.url + api_url + list, verify=False, headers=header )
 		print(json.loads(response.text))
 
-	def classlist(self,list,method):
-		if list == "class-list":
-			if method == "get":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.get( self.url + api_url + list, verify=False, headers=header )
-				print(json.loads(response.text))
-			elif method == "post":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.post( self.url + api_url + list, + self.classlist1, verify=False, data=json.dumps(self.payload))
-				print(json.loads(response.text))
-			elif method == "put":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.get( self.url + api_url + list, verify=False, headers=header )
-				print(json.loads(response.text))
-			else:
-				print("method is invalid")
-		elif list == "access-list":
-			if method == "get":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.get( self.url + api_url + list, verify=False, headers=header )
-				print(json.loads(response.text))
-			elif method == "post":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.get( self.url + api_url + list, verify=False, headers=header )
-				print(json.loads(response.text))
-			elif method == "put":
-				header = {'Content-Type':'application/json','Authorization': self.signature}
-				response = requests.get( self.url + api_url + list, verify=False, headers=header )
-				print(json.loads(response.text))
+	def classlist(self,method):
+		header = {'Content-Type':'application/json','Authorization': self.signature}
+		if method == "get":
+			response = requests.get( self.url + api_url + "class-list", verify=False, headers=header )
+		elif method == "post":
+			response = requests.post( self.url + api_url + "class-list", verify=False, headers=header, data=self.payload)
+		elif method == "put":
+			response = requests.get( self.url + api_url + "class-list", verify=False, headers=header )
 		else:
-			print("list is invalid")
-
+			print("method is invalid")
+		print (response.status_code)
+		return json.loads(response.text)
+#	def accesslist(self,method):
+#		if method == "get":
+#			response = requests.get( self.url + api_url + "access-list", verify=False, headers=header )
+#		elif method == "post":
+#			response = requests.get( self.url + api_url + "access-list", verify=False, headers=header )
+#		elif method == "put":
+#			response = requests.get( self.url + api_url + "access-list", verify=False, headers=header )
+#		else:
+#			print("method is invalid")	
+#		return json.loads(response.text)
 a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='a10')
 a10.login()
-print(a10.signature)
-a10.classlist("class-list","post")
+#print(a10.signature)
+a10.classlist("post")
