@@ -9,7 +9,7 @@ null = 'null'
 f = open('class-list1.json', 'r')
 print (f)
 jsonData = json.load(f)
-jsonData = json.dumps(f)
+jsonData = json.dumps(jsonData)
 print (jsonData)
 
 class A10(Machine):
@@ -19,8 +19,7 @@ class A10(Machine):
 		self.signature = ''	
 		self.url = 'https://' + kwargs['ipaddr'] 	
 		self.header = {'Content-Type':'application/json'}
-		self.payload = "'{}'".format(jsonData)
-#		self.payload = f
+		self.payload = jsonData
 #		self.payload = '{"class-list":{"ac-list":[{"ac-key-string":".yammerusercontent.com","ac-match-type":"ends-with"}],"name":"test5","type":"ac","uuid":null}}'
 
 		print (self.payload)
