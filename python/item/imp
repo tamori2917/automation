@@ -1,7 +1,6 @@
 #coding:utf-8
 import json
+import json_replace
 
-f = open('class-list1.json', 'r')
-jsonData = json.load(f)
-#test = json.dumps(jsonData, sort_keys = True, indent = 0)
-print (jsonData)
+json_replace.test = Json_replace("class-list1")
+
