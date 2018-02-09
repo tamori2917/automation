@@ -1,28 +1,23 @@
+<<<<<<< HEAD
 import requests
 import json 
+=======
+
 import requests 
 import json
 import json_replace
+>>>>>>> 36b51fa8f1932f8f51d47dd9ecc40687a24bef73
 from machine import Machine
-
 #Disable Warning for Certificate Error
 requests.packages.urllib3.disable_warnings()
 api_url = '/axapi/v3/'
 null = 'null'
 
-<<<<<<< HEAD
-f = open('class-list1.json', 'r')
-print (f)
-jsonData = json.load(f)
-jsonData = json.dumps(jsonData)
-print (jsonData)
-
-=======
 ##reform json_data
 jsonData = json_replace.Json_replace("class-list1.json")
 jsonData1 = json_replace.Json_replace("access-list-exd.json")
->>>>>>> mori2
 class A10(Machine):
+<<<<<<< HEAD
     def __init__(self,*args,**kwargs):
         super(A10,self).__init__(**kwargs)
         self.session = ''
@@ -49,12 +44,7 @@ class A10(Machine):
 		self.url = 'https://' + kwargs['ipaddr'] 	
 		self.header = {'Content-Type':'application/json'}
 		self.payload = jsonData
-<<<<<<< HEAD
-#		self.payload = '{"class-list":{"ac-list":[{"ac-key-string":".yammerusercontent.com","ac-match-type":"ends-with"}],"name":"test5","type":"ac","uuid":null}}'
-
-=======
 		self.payload1 = jsonData1
->>>>>>> mori2
 		print (self.payload)
 >>>>>>> 36b51fa8f1932f8f51d47dd9ecc40687a24bef73
 
@@ -89,6 +79,7 @@ class A10(Machine):
     def ssh_output():
         
 
+<<<<<<< HEAD
 ###############################################TESTING CLASS###################################################    
 ###############################################TESTING CLASS###################################################    
 ###############################################TESTING CLASS###################################################    
@@ -97,6 +88,7 @@ a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='
 a10.login()
 ##a10.classlist("put")
 #a10.accesslist("get")
+=======
 	def classlist(self,method):
 		header = {'Content-Type':'application/json','Authorization': self.signature}
 		if method == "get":
