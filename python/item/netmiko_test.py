@@ -6,16 +6,15 @@ import re
 linuxpc = {
         'device_type':'linux',
         'ip':'127.0.0.1',
-        'username':'',
-        'password':''
+        'username':'khaianna',
+        'password':'kanna1231'
 } 
 
 connect = ConnectHandler(**linuxpc)
 
-output = connect.send_command('ls -la')
-print(output)
+service = "sshd"
+output = connect.send_command("sudo ps aux | egrep '{}'").format(service)
 print(type(output))
-grep = re.search('.vim',output)
-grep2 = re.match('.vim',output)
-print("grep = {}".format(grep.group()))
-print("grep = {}".format(grep2))
+#grep = re.search('.vim',output)
+#print("grep = {}".format(grep.group()))
+print(output)

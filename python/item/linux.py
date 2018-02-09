@@ -31,5 +31,6 @@ class linux(Machine):
 
 
 #server = ("ftp", "snmp", "syslog")  
-#test = linux(username=khairul, password=, ipaddr=127.0.0.1, *server)
+process_id = ("ftp", "snmp", "syslog")  
+test = linux(username=khairul, password=, ipaddr=127.0.0.1, *server)
 #print(test.server_check)
