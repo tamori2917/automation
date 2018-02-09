@@ -1,0 +1,11 @@
+{
+	"class-list": {
+		"name": "a",
+		"ac-list": [{
+			"ac-match-type": "ends-with",
+			"ac-key-string": "abc.com"				
+		}],
+				"uuid": "null",
+				"type": "ac"							
+	}
+}
