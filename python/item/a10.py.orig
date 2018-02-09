@@ -1,10 +1,13 @@
+<<<<<<< HEAD
 import requests
 import json 
+=======
+
 import requests 
 import json
 import json_replace
+>>>>>>> 36b51fa8f1932f8f51d47dd9ecc40687a24bef73
 from machine import Machine
-
 #Disable Warning for Certificate Error
 requests.packages.urllib3.disable_warnings()
 api_url = '/axapi/v3/'
@@ -14,6 +17,7 @@ null = 'null'
 jsonData = json_replace.Json_replace("class-list1.json")
 jsonData1 = json_replace.Json_replace("access-list-exd.json")
 class A10(Machine):
+<<<<<<< HEAD
     def __init__(self,*args,**kwargs):
         super(A10,self).__init__(**kwargs)
         self.session = ''
@@ -75,6 +79,7 @@ class A10(Machine):
     def ssh_output():
         
 
+<<<<<<< HEAD
 ###############################################TESTING CLASS###################################################    
 ###############################################TESTING CLASS###################################################    
 ###############################################TESTING CLASS###################################################    
@@ -83,6 +88,7 @@ a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='
 a10.login()
 ##a10.classlist("put")
 #a10.accesslist("get")
+=======
 	def classlist(self,method):
 		header = {'Content-Type':'application/json','Authorization': self.signature}
 		if method == "get":

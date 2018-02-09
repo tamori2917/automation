@@ -2,5 +2,5 @@
 import json
 import json_replace
 
-json_replace.test = Json_replace("class-list1")
-
+a = json_replace.Json_replace("class-list1.json")
+print (a)
