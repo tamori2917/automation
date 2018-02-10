@@ -7,25 +7,20 @@ from machine import Machine
 
 #Disable Warning for Certificate Error
 requests.packages.urllib3.disable_warnings()
-api_url = '/axapi/v3/'
-null = 'null'
 
-f = open('class-list1.json', 'r')
-print (f)
-jsonData = json.load(f)
-jsonData = json.dumps(jsonData)
-print (jsonData)
+api_url = '/axapi/v3/'
+
 
 ##reform json_data
-jsonData = json_replace.Json_replace("class-list1.json")
-jsonData1 = json_replace.Json_replace("access-list-exd.json")
+#jsonData = json_replace.Json_replace("class-list1.json")
+#jsonData1 = json_replace.Json_replace("access-list-exd.json")
+
 class A10(Machine):
     def __init__(self,*args,**kwargs):
         super(A10,self).__init__(**kwargs)
         self.session = ''
         self.signature = '' 
         self.url = 'https://' + kwargs['ipaddr']
-        self.payload = jsonData
 
     def login(self):
         self.header = {'Content-Type':'application/json'}
@@ -38,6 +33,13 @@ class A10(Machine):
     def logoff(self):
         response = requests.post( self.url + api_url + 'logoff',verify=False, headers=self.header)
         print(json.loads(response.text))
+    
+    def import_json():
+        f = open('./json/class-list1.json', 'r')
+        jsonData = json.load(f)
+        jsonData = json.dumps(jsonData)
+        self.payload = jsonData
+        return jsonData
 
     def get(self,list):
         response = requests.get( self.url + api_url + list, verify=False, headers=self.header )
@@ -67,15 +69,13 @@ class A10(Machine):
         else:
             print("method is invalid")  
         return json.loads(response.text)
-    def ssh_output():
+#    def ssh_output():
         
 
 ###############################################TESTING CLASS###################################################    
-###############################################TESTING CLASS###################################################    
-###############################################TESTING CLASS###################################################    
-###############################################TESTING CLASS###################################################    
 a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='a10')
-a10.login()
+print(a10.import_json())
+#a10.login()
 ##a10.classlist("put")
 #a10.accesslist("get")
-a10.logoff()
+#a10.logoff()
