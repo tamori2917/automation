@@ -7,25 +7,25 @@ from netmiko import ConnectHandler
 class Machine(object):
         def __init__(self,**kwargs):
 	    #try:	
-                #self.hostname = kwargs.get('hostname',"hello")	
-                self.username = kwargs['username']
-                self.password = kwargs['password']	
-                self.ipaddr = kwargs['ipaddr']
-                self.device_type = kwargs['device_type']
-                machine = {
+            #self.hostname = kwargs.get('hostname',"hello")	
+            self.username = kwargs['username']
+            self.password = kwargs['password']	
+            self.ipaddr = kwargs['ipaddr']
+            self.device_type = kwargs['device_type']
+                            #except:
+            #    print("Argument Error , Please check error")
+
+        def login(self):
+            machine = {
                         'device_type':self.device_type,
                         'username':self.username,
                         'password':self.password,
                         'ip':self.ipaddr
                         }
-                self.ssh = ConnectHandler(**machine)
-            #except:
-            #    print("Argument Error , Please check error")
-               
+            self.ssh = ConnectHandler(**machine)
+
         def logoff_ssh(self):
-                self.ssh.disconnect()
-        
-        def json_import(self,filepath)
+            self.ssh.disconnect()
 
 ##For testing Class##
 #test = Machine(username='admin',password='a10',ipaddr='192.168.201.15',device_type='a10')
