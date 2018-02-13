@@ -24,6 +24,8 @@ class Machine(object):
                
         def logoff_ssh(self):
                 self.ssh.disconnect()
+        
+        def json_import(self,filepath)
 
 ##For testing Class##
 #test = Machine(username='admin',password='a10',ipaddr='192.168.201.15',device_type='a10')

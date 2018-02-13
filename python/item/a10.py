@@ -10,18 +10,15 @@ requests.packages.urllib3.disable_warnings()
 api_url = '/axapi/v3/'
 null = 'null'
 
-<<<<<<< HEAD
 f = open('class-list1.json', 'r')
 print (f)
 jsonData = json.load(f)
 jsonData = json.dumps(jsonData)
-print (jsonData)
 
-=======
 ##reform json_data
 jsonData = json_replace.Json_replace("class-list1.json")
 jsonData1 = json_replace.Json_replace("access-list-exd.json")
->>>>>>> mori2
+
 class A10(Machine):
     def __init__(self,*args,**kwargs):
         super(A10,self).__init__(**kwargs)
@@ -41,22 +38,6 @@ class A10(Machine):
     def logoff(self):
         response = requests.post( self.url + api_url + 'logoff',verify=False, headers=self.header)
         print(json.loads(response.text))
-=======
-	def __init__(self,*args,**kwargs):
-		super(A10,self).__init__(**kwargs)
-		self.session = ''
-		self.signature = ''	
-		self.url = 'https://' + kwargs['ipaddr'] 	
-		self.header = {'Content-Type':'application/json'}
-		self.payload = jsonData
-<<<<<<< HEAD
-#		self.payload = '{"class-list":{"ac-list":[{"ac-key-string":".yammerusercontent.com","ac-match-type":"ends-with"}],"name":"test5","type":"ac","uuid":null}}'
-
-=======
-		self.payload1 = jsonData1
->>>>>>> mori2
-		print (self.payload)
->>>>>>> 36b51fa8f1932f8f51d47dd9ecc40687a24bef73
 
     def get(self,list):
         response = requests.get( self.url + api_url + list, verify=False, headers=self.header )
@@ -76,7 +57,6 @@ class A10(Machine):
         return json.loads(response.text)
 
     def accesslist(self,method):
-        header = {'Content-Type':'application/json','Authorization': self.signature}
         if method == "get":
             response = requests.get( self.url + api_url + "ip/" + "access-list/" + "standard" + "99", verify=False, headers=self.header )
 #       elif method == "post":
@@ -97,33 +77,3 @@ a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='
 a10.login()
 ##a10.classlist("put")
 #a10.accesslist("get")
-	def classlist(self,method):
-		header = {'Content-Type':'application/json','Authorization': self.signature}
-		if method == "get":
-			response = requests.get( self.url + api_url + "class-list", verify=False, headers=header )
-		elif method == "post":
-			response = requests.post( self.url + api_url + "class-list", verify=False, headers=header, data=self.payload)
-		elif method == "put":
-			response = requests.put( self.url + api_url + "class-list/" + "a", verify=False, headers=header, data=self.payload)
-		else:
-			print("method is invalid")
-		print (response.status_code)
-		return json.loads(response.text)
-	def accesslist(self,method):
-		header = {'Content-Type':'application/json','Authorization': self.signature}
-		if method == "get":
-			response = requests.get( self.url + api_url + "ip/" + "access-list/" + "standard" + "99", verify=False, headers=header )
-		elif method == "post":
-			response = requests.post( self.url + api_url + "access-list", verify=False, headers=header, data=self.payload1)
-#		elif method == "put":
-#			response = requests.get( self.url + api_url + "access-list", verify=False, headers=header )
-		else:
-			print("method is invalid")	
-		return json.loads(response.text)
-		
-a10 = A10(username='admin',password='a10',ipaddr='192.168.201.31' ,device_type='a10')
-a10.login()
-#a10.classlist("put")
-a10.accesslist("post")
->>>>>>> 36b51fa8f1932f8f51d47dd9ecc40687a24bef73
-a10.logoff()
