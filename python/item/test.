@@ -1,0 +1,54 @@
+hellllllooooooooooooooooooooooo
+the class is a 4
+Response Code = 200
+{
+    "class-list-list": [
+        {
+            "name": "a",
+            "type": "ac",
+            "file": 0,
+            "ac-list": [
+                {
+                    "ac-match-type": "ends-with",
+                    "ac-key-string": "abc.com"
+                }
+            ],
+            "uuid": "d38c2df6-0c8f-11e8-bce1-005056a93f24",
+            "a10-url": "/axapi/v3/class-list/a"
+        },
+        {
+            "name": "box-list",
+            "type": "ac",
+            "file": 1,
+            "uuid": "740ebc70-0c91-11e8-bce1-005056a93f24",
+            "a10-url": "/axapi/v3/class-list/box-list"
+        },
+        {
+            "name": "www.example5.co.jp",
+            "type": "ac",
+            "file": 0,
+            "ac-list": [
+                {
+                    "ac-match-type": "equals",
+                    "ac-key-string": "www.example5.co.jp"
+                }
+            ],
+            "uuid": "4b313bda-0ae7-11e8-bce1-005056a93f24",
+            "a10-url": "/axapi/v3/class-list/www.example5.co.jp"
+        },
+        {
+            "name": "www1.example5.co.jp",
+            "type": "ac",
+            "file": 0,
+            "ac-list": [
+                {
+                    "ac-match-type": "equals",
+                    "ac-key-string": "www1.example5.co.jp"
+                }
+            ],
+            "uuid": "513377c8-0ae7-11e8-bce1-005056a93f24",
+            "a10-url": "/axapi/v3/class-list/www1.example5.co.jp"
+        }
+    ]
+}
+{'response': {'status': 'OK'}}
