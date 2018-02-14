@@ -15,7 +15,7 @@ class A10(Machine):
 		super(A10,self).__init__(**kwargs)
 		self.session = ''
 		self.signature = ''	
-		self.url = 'https://' + kwargs['ipaddr'] 	
+		self.url = 'https://' + kwargs['ipaddr']	
 		self.header = {'Content-Type':'application/json'}
 		self.payload = jsonData
 		self.payload1 = jsonData1
