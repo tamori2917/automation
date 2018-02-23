@@ -1,0 +1,12 @@
+{
+	"access-list": {
+		"rules": [{
+			"src-any": 1,
+			"action": "permit",
+			"dst-any": 1,
+			"ip": 1
+		}],
+		"name": "test123"
+	}
+
+}

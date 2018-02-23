@@ -1,11 +1,14 @@
 {
 	"class-list": {
-		"name": "a",
+		"name": "postmation",
 		"ac-list": [{
 			"ac-match-type": "ends-with",
-			"ac-key-string": "abc.com"				
+			"ac-key-string": "abc1.com"
+		}, {
+			"ac-match-type": "ends-with",
+			"ac-key-string": "abc2.com"
 		}],
-				"uuid": "null",
+				"uuid": "",
 				"type": "ac"							
 	}
 }

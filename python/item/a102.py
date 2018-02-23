@@ -7,7 +7,7 @@ from machine import Machine
 #Disable Warning for Certificate Error
 requests.packages.urllib3.disable_warnings()
 api_url = '/axapi/v3/'
-
+ip_acl = 'ip/access-list/'
 ##reform json_data
 #jsonData = json_replace.Json_replace("class-list1.json")
 #jsonData1 = json_replace.Json_replace("access-list-exd.json")
@@ -21,6 +21,7 @@ class A10(Machine):
 		self.url = 'https://' + kwargs['ipaddr']
 		self.cl_count = 0
 		self.acl_count = 0
+		self.response = ''
 		#create dir for each a10 calls
 		if not os.path.exists('./json/{}'.format(self.hostname)):
 			os.makedirs('./json/{}'.format(self.hostname))
@@ -49,47 +50,65 @@ class A10(Machine):
 		print('hello')
 
 	def calist(self,list,method):
+		url = self.url + api_url + "class-list/"
 		payload = self.import_json('./json/class-list1.json')
+		payload2 = self.import_json('./json/class-list2.json')
+		payload3 = self.import_json('./json/class-list3.json')
 		aclpayload = self.import_json('./json/access-list1.json')
-		print('payload is {}'.format(payload))
+		#print('payload is {}'.format(payload))
 		#self.cl = {:}
 		if list == "class":
+			###post method replaces all contents of specific list , so it behaves like a put method
+			###but put method replaces contents and list's name , post method only replaces contents
+			###so in short , you can not append content
 			if method == "get":
-				response = requests.get( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header )
+				response = requests.get(url,verify=False, headers=self.header )
 				print(json.loads(response.text))
-			elif method == "post":
-				response = requests.post( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload)
-				print (self.url + api_url + "class-list")
+			elif method == "new":
+				response = requests.post( self.url + api_url + "class-list/", verify=False, headers=self.header, data=payload)
+				print(json.loads(response.text))
+			elif method == "new2":
+				response = requests.post( self.url + api_url + "class-list/", verify=False, headers=self.header, data=payload2)
+				print(json.loads(response.text))
+			elif method == "edit":
+				response = requests.post( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload2)
 				print(json.loads(response.text))
 			elif method == "put":
-				response = requests.put( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload)
+				response = requests.put( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload3)
 				print(json.loads(response.text))
-			elif method == "delete":
-				response = requests.put( self.url + api_url + "class-list/", verify=False, headers=self.header )
+			elif method == "del":
+				response = requests.delete( self.url + api_url + "class-list/", verify=False, headers=self.header )
+				print(response)
 				print(json.loads(response.text))
 			else:
 				print("method is invalid")
 				print ('Response Code = {}'.format(response.status_code))
 				count = json.loads(response.text)
 				self.cl_count = len(count["class-list-list"])
-				return json.loads(response.text)
 		elif list == "acl":
+			###if you want to modify ip-access-list you need to use put method
+			###because post method inserts list from above , recommend to only use post method for new creating
 			if method == "get":
-				response = requests.get( self.url + api_url + "ip/" + "access-list/", verify=False, headers=self.header )
+				response = requests.get( self.url + api_url + ip_acl , verify=False, headers=self.header )
 				print(json.loads(response.text))
-			elif method == "post":
-				response = requests.post( self.url + api_url + "ip/" + "access-list/" + "test123", verify=False, headers=self.header, data=aclpayload)
+			elif method == "new":
+				response = requests.post( self.url + api_url + ip_acl , verify=False, headers=self.header, data=aclpayload)
+				print(json.loads(response.text))
+			elif method == "edit":
+				response = requests.post( self.url + api_url + ip_acl  + "test123", verify=False, headers=self.header, data=aclpayload)
 				print(json.loads(response.text))
 			elif method == "put":
-				response = requests.put( self.url + api_url + "ip/" + "access-list/" + "test123", verify=False, headers=self.header, data=aclpayload)   
+				response = requests.put( self.url + api_url + ip_acl + "test123", verify=False, headers=self.header, data=aclpayload)   
 				print(json.loads(response.text))
-				
+			elif method == "del":
+				response = requests.delete( self.url + api_url + ip_acl , verify=False, headers=self.header )
+				print(json.loads(response.text))
 		else:
 			print("method is invalid")	 
 			print ('Response Code = {}'.format(response.status_code))
 			count = json.loads(response.text)
 			self.cl_count = len(count["class-list-list"])
-			return json.loads(response.text)
+		return response
 ###############################################TESTING CLASS###################################################	   
 ###############################################TESTING CLASS###################################################	   
 ###############################################TESTING CLASS###################################################	   
@@ -98,7 +117,7 @@ a10 = A10(hostname='a10', username='admin',password='a10',ipaddr='192.168.201.31
 #print(a10.import_json('./json/class-list1.json')
 a10.login()
 #print(json.dumps(a10.classlist("get"), sort_keys=False, indent=4, separators=(',',': ')))
-print(a10.calist("acl","put"))
+print(a10.calist("class","edit"))
 
 a10.logoff()
 

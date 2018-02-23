@@ -1,0 +1,13 @@
+{
+	"access-list": {
+		"rules": [{
+			"src-any": 1,
+			"action": "permit",
+			"dst-any": 1,
+			"ip": 1
+		}],
+		"name": "test123",
+		"a10-url": "/axapi/v3/ip/access-list/test123"
+	}
+
+}

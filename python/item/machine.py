@@ -15,7 +15,7 @@ class Machine(object):
                             #except:
             #    print("Argument Error , Please check error")
 
-        def login(self):
+        def login_ssh(self):
             machine = {
                         'device_type':self.device_type,
                         'username':self.username,

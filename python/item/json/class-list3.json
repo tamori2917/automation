@@ -1,0 +1,11 @@
+{
+	"class-list": {
+		"name": "putmation",
+		"ac-list": [{
+			"ac-match-type": "ends-with",
+			"ac-key-string": "new3.com"
+		}],
+				"uuid": "",
+				"type": "ac"							
+	}
+}
