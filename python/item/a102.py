@@ -49,12 +49,9 @@ class A10(Machine):
 		#with open("./json/{}/classlist")
 		print('hello')
 
-	def calist(self,list,method):
+	def calist(self,list,method,*arg):
 		url = self.url + api_url + "class-list/"
-		payload = self.import_json('./json/class-list1.json')
-		payload2 = self.import_json('./json/class-list2.json')
-		payload3 = self.import_json('./json/class-list3.json')
-		aclpayload = self.import_json('./json/access-list1.json')
+		header = verify=False, headers=self.header 
 		#print('payload is {}'.format(payload))
 		#self.cl = {:}
 		if list == "class":
@@ -62,22 +59,16 @@ class A10(Machine):
 			###but put method replaces contents and list's name , post method only replaces contents
 			###so in short , you can not append content
 			if method == "get":
-				response = requests.get(url,verify=False, headers=self.header )
+				response = requests.get(url + "," + header )
 				print(json.loads(response.text))
-			elif method == "new":
-				response = requests.post( self.url + api_url + "class-list/", verify=False, headers=self.header, data=payload)
-				print(json.loads(response.text))
-			elif method == "new2":
-				response = requests.post( self.url + api_url + "class-list/", verify=False, headers=self.header, data=payload2)
-				print(json.loads(response.text))
-			elif method == "edit":
-				response = requests.post( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload2)
+			elif method == "post":
+				response = requests.post( url + arg[1], header + "," + data=arg[0])
 				print(json.loads(response.text))
 			elif method == "put":
-				response = requests.put( self.url + api_url + "class-list/" + "postmation", verify=False, headers=self.header, data=payload3)
+				response = requests.put( url + arg[1], header + "," + data=arg[0])
 				print(json.loads(response.text))
 			elif method == "del":
-				response = requests.delete( self.url + api_url + "class-list/", verify=False, headers=self.header )
+				response = requests.delete( url, header )
 				print(response)
 				print(json.loads(response.text))
 			else:

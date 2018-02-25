@@ -5,6 +5,10 @@ a10 = A10(hostname='a10', username='admin',password='a10',ipaddr='192.168.201.31
 a10.login()
 a10.login_ssh()
 
+payload = self.import_json('./json/class-list1.json')
+payload2 = self.import_json('./json/class-list2.json')
+payload3 = self.import_json('./json/class-list3.json')
+aclpayload = self.import_json('./json/access-list1.json')
 
 ### initialize and delete test
 response = a10.calist("class","del")
@@ -15,7 +19,7 @@ else:
 	print ("class-list hasn't been deleted")
 
 ###### judge whether create new class-list accurately
-response = a10.calist("class","new")
+response = a10.calist("class","post",payload)
 code = response.status_code
 if str(code) == "200":
 	print ("class-list has been created")
@@ -39,7 +43,7 @@ newlist = json.loads(response.text)
 """
 ###### judge whether replace existing class-list accurately
 ### only change contents
-response = a10.calist("class","edit")
+response = a10.calist("class","post",payload2,postmation)
 new2list = json.loads(response.text)
 code = response.status_code
 if str(code) == "200":
@@ -48,13 +52,14 @@ if str(code) == "200":
 	elif "new2" in str(new2list):
 		print("post method has overwrited")
 	else:
-		print("unexpected process has occured")
+	print("unexpected process has occured")
 else:
 	print("http error has occured")
 
 ###### judge whether replace exsting class-list accurately
-### change both list and contents
-response = a10.calist("class","put")
+### only change contents
+### could not change class-list name 
+response = a10.calist("class","put",payload3,postmation)
 new3list = json.loads(response.text)
 code = response.status_code
 print (code)

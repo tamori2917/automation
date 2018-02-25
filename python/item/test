@@ -1,0 +1,8 @@
+def argtest(a , b , *args):
+	print (a + "and" + b + "and" + args)
+
+
+
+
+argtest(mori,azusa,ramune)
+
